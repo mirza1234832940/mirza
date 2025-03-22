@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mirza Perfumes</title>
+    <title>Mirza Perfumes - Online Store</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,8 +27,18 @@
             margin: 10px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width: 200px;
         }
-        .contact {
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .cart {
             margin-top: 20px;
             padding: 10px;
             background: #ddd;
@@ -36,7 +46,7 @@
     </style>
 </head>
 <body>
-    <header>Mirza Perfumes</header>
+    <header>Mirza Perfumes - Online Store</header>
     <div class="container">
         <h2>Welcome to Mirza</h2>
         <p>Premium Lattafa perfume samples at great prices!</p>
@@ -44,18 +54,47 @@
         <h3>Our Products</h3>
         <div class="product">
             <h4>Perfume Sample 1</h4>
-            <p>Rich Arabian scent with a long-lasting fragrance.</p>
+            <p>Rich Arabian scent - $10</p>
+            <button onclick="addToCart('Perfume Sample 1', 10)">Add to Cart</button>
         </div>
         <div class="product">
             <h4>Perfume Sample 2</h4>
-            <p>Fresh and elegant, perfect for everyday use.</p>
+            <p>Fresh & elegant - $12</p>
+            <button onclick="addToCart('Perfume Sample 2', 12)">Add to Cart</button>
         </div>
         
-        <div class="contact">
-            <h3>Contact Us</h3>
-            <p>Email: contact@mirzaperfumes.com</p>
-            <p>Instagram: @mirzaperfumes</p>
+        <div class="cart">
+            <h3>Shopping Cart</h3>
+            <ul id="cart-items"></ul>
+            <p><strong>Total: $<span id="total">0</span></strong></p>
+            <button onclick="checkout()">Checkout</button>
         </div>
     </div>
+    
+    <script>
+        let cart = [];
+        
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            updateCart();
+        }
+        
+        function updateCart() {
+            let cartList = document.getElementById('cart-items');
+            let totalPrice = 0;
+            cartList.innerHTML = '';
+            cart.forEach(item => {
+                totalPrice += item.price;
+                let li = document.createElement('li');
+                li.innerText = `${item.product} - $${item.price}`;
+                cartList.appendChild(li);
+            });
+            document.getElementById('total').innerText = totalPrice;
+        }
+        
+        function checkout() {
+            alert('Redirecting to payment (this needs a payment gateway)');
+        }
+    </script>
 </body>
 </html>
